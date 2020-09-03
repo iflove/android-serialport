@@ -16,6 +16,8 @@
 
 package android_serialport_api;
 
+import android.util.Log;
+
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
@@ -23,8 +25,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
-import android.util.Log;
 
 public class SerialPort {
 
@@ -76,9 +76,28 @@ public class SerialPort {
 		return mFileOutputStream;
 	}
 
+	/**************************************modify start********************************************/
+	public void closeStream() {
+		try {
+			if (null != mFileOutputStream) {
+				mFileOutputStream.close();
+				mFileOutputStream = null;
+			}
+			if (null != mFileInputStream) {
+				mFileInputStream.close();
+				mFileInputStream = null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**************************************modify end********************************************/
 	// JNI
 	private native static FileDescriptor open(String path, int baudrate, int flags);
+
 	public native void close();
+
 	static {
 		System.loadLibrary("serial_port");
 	}
