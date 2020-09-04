@@ -7,6 +7,6 @@
 
 ```
 dependencies {
-    implementation 'com.lazy.android:serialport:1.2'
+    implementation 'com.github.iflove:android-serialport:1.6'
 }
 ```
